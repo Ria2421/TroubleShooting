@@ -30,7 +30,9 @@ public class PlayerGenerate : MonoBehaviour
     void Start()
     {
         // プレイヤーの生成
-        Instantiate(playerObjs[Random.Range(0, playerObjs.Count)], Vector3.zero, Quaternion.identity,this.gameObject.transform);
+        GameObject childObj =  Instantiate(playerObjs[Random.Range(0, playerObjs.Count)]);
+        childObj.transform.parent = this.transform;
+
     }
 
     /// <summary>
@@ -47,6 +49,7 @@ public class PlayerGenerate : MonoBehaviour
     public void GeneratePlayer()
     {
         // プレイヤーの生成
-        Instantiate(playerObjs[Random.Range(0, playerObjs.Count)], Vector3.zero, Quaternion.identity,this.gameObject.transform);
+        GameObject childObj = Instantiate(playerObjs[Random.Range(0, playerObjs.Count)]);
+        childObj.transform.parent = this.transform;
     }
 }

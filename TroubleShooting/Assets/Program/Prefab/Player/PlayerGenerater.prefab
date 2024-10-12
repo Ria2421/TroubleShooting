@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObjs:
-  - {fileID: 3658682436638550825, guid: 3552c647a8bb117489ad4cd163e4a5cd, type: 3}
-  - {fileID: 2941865974404863955, guid: 9b99967c4d3e0b341be12caa92b10e7c, type: 3}
-  - {fileID: 5940753526488635911, guid: 7e9c7f3e4989f5c49839ece3468be02b, type: 3}
-  - {fileID: 4227852816421996520, guid: ffca8efd8a335b14390b6f665b8f2f32, type: 3}
+  - {fileID: 2837691793964126592, guid: ffca8efd8a335b14390b6f665b8f2f32, type: 3}
+  - {fileID: 7742183335306104518, guid: 3552c647a8bb117489ad4cd163e4a5cd, type: 3}
+  - {fileID: 7230595239747638634, guid: 7e9c7f3e4989f5c49839ece3468be02b, type: 3}
+  - {fileID: 764585720588537918, guid: 9b99967c4d3e0b341be12caa92b10e7c, type: 3}

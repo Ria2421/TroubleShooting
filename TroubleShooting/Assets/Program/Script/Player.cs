@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
     private PlayerGenerate playerGenerate;
 
     /// <summary>
+    /// ヒットエフェクト
+    /// </summary>
+    [SerializeField] private GameObject hitEffect;
+
+    /// <summary>
     /// 移動秒数
     /// </summary>
     [SerializeField] private float moveSecond = 0f;
@@ -59,28 +64,28 @@ public class Player : MonoBehaviour
             moveFlag = true;
 
             // 移動処理
-            this.transform.DOMove(new Vector3(0f, 5f, 0f), moveSecond);
+            this.transform.DOMove(new Vector3(0f, 4f, 0f), moveSecond);
         }
         else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {   // S・↓キー操作
             moveFlag = true;
 
             // 移動処理
-            this.transform.DOMove(new Vector3(0f, -5f, 0f), moveSecond);
+            this.transform.DOMove(new Vector3(0f, -4f, 0f), moveSecond);
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {   // A・←キー操作
             moveFlag = true;
 
             // 移動処理
-            this.transform.DOMove(new Vector3(-5f, 0f, 0f), moveSecond);
+            this.transform.DOMove(new Vector3(-4f, 0f, 0f), moveSecond);
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {   // D・→キー操作
             moveFlag = true;
 
             // 移動処理
-            this.transform.DOMove(new Vector3(5f, 0f, 0f), moveSecond);
+            this.transform.DOMove(new Vector3(4f, 0f, 0f), moveSecond);
         }
     }
 
@@ -94,7 +99,7 @@ public class Player : MonoBehaviour
         {   // 成功時
 
             //++ スコアの加算処理
-
+            Instantiate(hitEffect,this.transform);
             playerGenerate.GeneratePlayer();
             Destroy(this.gameObject);
         }
