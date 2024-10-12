@@ -38,9 +38,9 @@ public class Player : MonoBehaviour
     private Vector3 revisionPos;
 
     /// <summary>
-    /// ヒットエフェクト
+    /// ヒットエフェクト [0:ヒット 1:出現 2:消失]
     /// </summary>
-    [SerializeField] private GameObject hitEffect;
+    [SerializeField] private List<GameObject> effects;
 
     /// <summary>
     /// 移動秒数
@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         playerGenerate = GetComponentInParent<PlayerGenerate>();
+        Instantiate(effects[2]);
     }
 
     /// <summary>
@@ -139,12 +140,12 @@ public class Player : MonoBehaviour
             }
 
             // hitエフェクト生成
-            GameObject effect = Instantiate(hitEffect,this.transform.position + revisionPos,Quaternion.identity);    
+            GameObject effect = Instantiate(effects[0],this.transform.position + revisionPos,Quaternion.identity);
+            Instantiate(effects[1], this.transform.position + new Vector3(0,0,-1), Quaternion.identity);
             effect.transform.eulerAngles = effectQuaternion;
             playerGenerate.GeneratePlayer();    // 凸生成
 
             playerGenerate.SuccessConnect();
-            Instantiate(hitEffect,this.transform);
             Destroy(this.gameObject);
         }
         else
