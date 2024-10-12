@@ -110,9 +110,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == this.gameObject.tag)
         {   // ¬Œ÷
             
-
             //++ ƒXƒRƒA‚Ì‰ÁZˆ—
-<<<<<<< .merge_file_2bZAJD
 
             switch (collision.gameObject.tag)
             {
@@ -144,22 +142,18 @@ public class Player : MonoBehaviour
             GameObject effect = Instantiate(hitEffect,this.transform.position + revisionPos,Quaternion.identity);    
             effect.transform.eulerAngles = effectQuaternion;
             playerGenerate.GeneratePlayer();    // “Ê¶¬
-=======
+
             playerGenerate.SuccessConnect();
             Instantiate(hitEffect,this.transform);
             playerGenerate.GeneratePlayer();
->>>>>>> .merge_file_QoxMDA
             Destroy(this.gameObject);
         }
         else
         {   // ¸”s
             Invoke("Failure", stunSecond);
-<<<<<<< .merge_file_2bZAJD
-=======
+
             this.gameObject.SetActive(false);
             playerGenerate.FailureConnect();
-
->>>>>>> .merge_file_QoxMDA
         }
     }
 
