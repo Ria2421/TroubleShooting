@@ -14,6 +14,13 @@ public class GameManager : BaseManager
     [SerializeField]
     private float m_finishGameWaitTime;
 
+    /// <summary> 基本の加算スコア</summary>
+    [SerializeField]
+    private int m_defaultAddScore;
+
+    /// <summary>コンボ数カウント</summary>
+    private int m_comboCount;
+
     /// <summary> UIマネージャ </summary>
     private MainGameUIManager m_uiManager;
 
@@ -43,6 +50,9 @@ public class GameManager : BaseManager
 
     protected override void OnStart()
     {
+        // TODO:競合対策　後で消す
+        m_defaultAddScore = m_defaultAddScore == 0 ? 10 : m_defaultAddScore;
+
         AddWaitTime(m_startGameWaitTime, OnEndStartGameWait);
     }
 
@@ -55,11 +65,12 @@ public class GameManager : BaseManager
     /// </summary>
     public void AddScore()
     {
+        m_comboCount++;
+
         if (m_scoreManager != null)
         {
             //暫定加算
-            m_uiManager.m_nTestCnt += 10;
-
+            m_uiManager.m_nTestCnt += m_defaultAddScore * m_comboCount;
         }
     }
 
@@ -68,9 +79,11 @@ public class GameManager : BaseManager
     /// </summary>
     public void SubtractScore()
     {
+        m_comboCount = 0;
+
         if (m_scoreManager != null)
         {
-            m_uiManager.m_nTestCnt -= 10;
+            //m_uiManager.m_nTestCnt -= 10;
         }
     }
 
