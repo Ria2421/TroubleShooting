@@ -145,7 +145,6 @@ public class Player : MonoBehaviour
 
             playerGenerate.SuccessConnect();
             Instantiate(hitEffect,this.transform);
-            playerGenerate.GeneratePlayer();
             Destroy(this.gameObject);
         }
         else
