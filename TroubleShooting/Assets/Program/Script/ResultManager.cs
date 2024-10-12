@@ -3,21 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameSceneManager;
 
-public class ResultManager : MonoBehaviour
+public class ResultManager : BaseManager
 {
-    private GameSceneManager m_gameSceneManager;
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>入力 ができるか</summary>
+    private bool m_isInputStart = false;
+
+    /// <summary> 入力待機時間 </summary>
+    [SerializeField]
+    private float m_waitInputTime;
+
+    protected override void OnStart()
     {
-        m_gameSceneManager = GameObject.Find("SceneManager").GetComponent<GameSceneManager>();
+        AddWaitTime(m_waitInputTime, OnStartInput);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnUpdate()
     {
-        if (Input.anyKey)
+        if (m_isInputStart && Input.anyKey)
         {
-            m_gameSceneManager.ChangeScene(SceneType.MainGame);
+            m_gameSceneManager.ChangeScene(SceneType.Title);
         }
     }
+
+    /// <summary>
+    /// 入力開始
+    /// </summary>
+    private void OnStartInput()
+    {
+        SetEnableInput( true );
+    }
+
+    /// <summary>
+    /// 入力有効設定
+    /// </summary>
+    /// <param name="_enable"></param>
+    public void SetEnableInput(bool _enable)
+    { 
+        m_isInputStart = _enable;
+    }
+    
 }

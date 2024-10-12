@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 
 public class Player : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
     /// 行動不能秒数
     /// </summary>
     [SerializeField] private float stunSecond = 0f;
+
 
     //--------------------------
     // メソッド
@@ -110,6 +112,7 @@ public class Player : MonoBehaviour
             
 
             //++ スコアの加算処理
+<<<<<<< .merge_file_2bZAJD
 
             switch (collision.gameObject.tag)
             {
@@ -141,11 +144,22 @@ public class Player : MonoBehaviour
             GameObject effect = Instantiate(hitEffect,this.transform.position + revisionPos,Quaternion.identity);    
             effect.transform.eulerAngles = effectQuaternion;
             playerGenerate.GeneratePlayer();    // 凸生成
+=======
+            playerGenerate.SuccessConnect();
+            Instantiate(hitEffect,this.transform);
+            playerGenerate.GeneratePlayer();
+>>>>>>> .merge_file_QoxMDA
             Destroy(this.gameObject);
         }
         else
         {   // 失敗時
             Invoke("Failure", stunSecond);
+<<<<<<< .merge_file_2bZAJD
+=======
+            this.gameObject.SetActive(false);
+            playerGenerate.FailureConnect();
+
+>>>>>>> .merge_file_QoxMDA
         }
     }
 

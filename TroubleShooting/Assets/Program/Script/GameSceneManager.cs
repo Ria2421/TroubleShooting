@@ -5,23 +5,31 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameSceneManager : MonoBehaviour
+public class GameSceneManager : BaseManager
 {
+    private SceneType m_currentSceneType;
+
     public enum SceneType
     { 
         Title,
         MainGame,
         Result
     }
-    void Start()
+
+    protected override void OnAwake()
     {
         DontDestroyOnLoad(this);
+    }
+
+    protected override void OnUpdate()
+    {
     }
 
     public void ChangeScene( SceneType _type )
     {
 
         string sceneName = "";
+        m_currentSceneType = _type;
 
         switch (_type)
         {
@@ -43,5 +51,10 @@ public class GameSceneManager : MonoBehaviour
 
         }
         SceneManager.LoadScene(sceneName);
+    }
+
+    public SceneType GetCurrentSceneType()
+    {
+        return m_currentSceneType;
     }
 }
