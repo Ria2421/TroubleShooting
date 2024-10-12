@@ -24,12 +24,12 @@ public class BaseManager : MonoBehaviour
 
     private void Awake()
     {
+        OnAwake();
         GameObject obj = GameObject.Find("SceneManager");
         if (obj != null)
         {
             m_gameSceneManager = obj.GetComponent<GameSceneManager>();
         }
-        OnAwake();
     }
 
     /// <summary>

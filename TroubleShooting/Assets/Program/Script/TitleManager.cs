@@ -12,6 +12,27 @@ public class TitleManager : BaseManager
     [SerializeField]
     private float m_waitInputTime;
 
+    /// <summary>生成用プレハブ</summary>
+    [SerializeField]
+    private GameObject m_scoreManager;
+
+    /// <summary>生成用プレハブ</summary>
+    [SerializeField]
+    private GameObject m_sceneManager;
+
+
+    protected override void OnAwake()
+    {
+        if (GameObject.Find("ScoreManager") == null)
+        {
+            Instantiate(m_scoreManager).gameObject.name = "ScoreManager";
+        }
+        if (GameObject.Find("SceneManager") == null)
+        {
+            Instantiate(m_sceneManager).gameObject.name = "SceneManager";
+        }
+    }
+
     private void Start()
     {
         AddWaitTime(m_waitInputTime, OnStartInput);
