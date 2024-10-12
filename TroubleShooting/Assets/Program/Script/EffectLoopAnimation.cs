@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EffectAnimation : MonoBehaviour
+public class EffectLoopAnimation : MonoBehaviour
 {
     Texture texture;
     public Sprite[] sprites;
@@ -33,6 +33,8 @@ public class EffectAnimation : MonoBehaviour
         }
         count+=10;
         //Debug.Log(count);
+
+        if(count == frame){index=0;}
     }
 
     void SetSprite(Sprite sp){
