@@ -1,49 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
 {
-    [SerializeField]
-    private SceneType nextScene;
-
     public enum SceneType
-    {
+    { 
         Title,
         MainGame,
         Result
     }
-
-    /// <summary>
-    /// SceneˆÚ“®
-    /// </summary>
-
-    public void LoadChangeScene( SceneType type )
+    void Start()
     {
+        DontDestroyOnLoad(this);
+    }
+
+    public void ChangeScene( SceneType _type )
+    {
+
         string sceneName = "";
 
-        switch( type )
-        { 
-        case SceneType.Title:
-            {
-                sceneName = "Title";
-            }
-            break;
+        switch (_type)
+        {
+            case SceneType.Title:
+                {
+                    sceneName = "Title";
+                }
+                break;
+            case SceneType.MainGame:
+                {
+                    sceneName = "MainGame";
+                }
+                break;
+            case SceneType.Result:
+                {
+                    sceneName = "Result";
+                }
+                break;
 
-        case SceneType.MainGame:
-            {
-                sceneName = "MainGame";
-            }
-            break;
-        case SceneType.Result:
-            { 
-                sceneName = "Result";
-            }
-            break;
         }
         SceneManager.LoadScene(sceneName);
     }
-
 }
