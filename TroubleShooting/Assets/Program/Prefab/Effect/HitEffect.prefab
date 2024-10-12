@@ -106,7 +106,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d7c46e0ae60425a448042aac3ffaaa7b, type: 3}
   - {fileID: 21300000, guid: 7951b49da7d83e34281c894394fa86e7, type: 3}
   - {fileID: 21300000, guid: b4a28bb34f9462041abe52507b4816be, type: 3}
-  frame: 60
+  frame: 1
 --- !u!212 &5869238528615614833
 SpriteRenderer:
   m_ObjectHideFlags: 0
