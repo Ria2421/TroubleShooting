@@ -25,16 +25,19 @@ public class EffectLoopAnimation : MonoBehaviour
         if(sprites.Length>index){
             SetSprite(sprites[index]);
         }else{
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         if(count>frame){
             index++;
             count=0;
         }
         count+=1;
-        //Debug.Log(count);
+        Debug.Log(index);
 
-        if(count == frame){index=0;}
+        if(index >= sprites.Length){
+            index=0;
+            count=0;
+        }
     }
 
     void SetSprite(Sprite sp){
