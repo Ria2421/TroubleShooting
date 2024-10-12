@@ -27,6 +27,16 @@ public class Player : MonoBehaviour
     private PlayerGenerate playerGenerate;
 
     /// <summary>
+    /// エフェクト角度
+    /// </summary>
+    private Vector3 effectQuaternion;
+
+    /// <summary>
+    /// エフェクト位置補正pos
+    /// </summary>
+    private Vector3 revisionPos;
+
+    /// <summary>
     /// ヒットエフェクト
     /// </summary>
     [SerializeField] private GameObject hitEffect;
@@ -97,17 +107,54 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == this.gameObject.tag)
         {   // 成功時
+            
 
             //++ スコアの加算処理
-            Instantiate(hitEffect,this.transform);
-            playerGenerate.GeneratePlayer();
+
+            switch (collision.gameObject.tag)
+            {
+                case "Up":
+                    effectQuaternion = new Vector3(0,180f,180f);
+                    revisionPos = new Vector3(0, -0.5f, 0);
+                    break;
+
+                case "Down":
+                    effectQuaternion = new Vector3(0, 180f, 0f);
+                    revisionPos = new Vector3(0, 0.5f, 0);
+                    break;
+
+                case "Right":
+                    effectQuaternion = new Vector3(0, 180f, 270f);
+                    revisionPos = new Vector3(-0.5f,0,0);
+                    break;
+
+                case "Left":
+                    effectQuaternion = new Vector3(0, 180f, 90f);
+                    revisionPos = new Vector3(0.5f, 0, 0);
+                    break;
+
+                default:
+                    break;
+            }
+
+            // hitエフェクト生成
+            GameObject effect = Instantiate(hitEffect,this.transform.position + revisionPos,Quaternion.identity);    
+            effect.transform.eulerAngles = effectQuaternion;
+            playerGenerate.GeneratePlayer();    // 凸生成
             Destroy(this.gameObject);
         }
         else
         {   // 失敗時
             Invoke("Failure", stunSecond);
-            this.gameObject.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// 成功時の処理
+    /// </summary>
+    private void Success()
+    {
+
     }
 
     /// <summary>

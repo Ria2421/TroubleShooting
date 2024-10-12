@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 3814630119094798492, guid: 34d93f8ec47b97a4ead7df289e5ff2a2, type: 3}
-  moveSecond: 0.5
-  stunSecond: 1.5
+  moveSecond: 0.35
+  stunSecond: 0.7
 --- !u!54 &3287325304150743685
 Rigidbody:
   m_ObjectHideFlags: 0
