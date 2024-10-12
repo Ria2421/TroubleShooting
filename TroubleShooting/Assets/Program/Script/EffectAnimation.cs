@@ -7,11 +7,10 @@ public class Effect : MonoBehaviour
 {
     Texture texture;
     public Sprite[] sprites;
-    public float speed;
     private SpriteRenderer sprite;
     private int index;
     private int count; 
-    public int frame = 60;
+    public int frame = 600;
 
     void Start()
     {
@@ -32,7 +31,7 @@ public class Effect : MonoBehaviour
             index++;
             count=0;
         }
-        count++;
+        count+=10;
         Debug.Log(count);
     }
 
