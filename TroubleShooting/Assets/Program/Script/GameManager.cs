@@ -26,9 +26,19 @@ public class GameManager : BaseManager
     protected override void OnAwake()
     {
         GameObject obj = GameObject.Find("UIManager");
-        m_uiManager    = obj.GetComponent<MainGameUIManager>();
-        m_timerManager = obj.GetComponent<MainGameTimerManager>();
-        m_scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+
+        if (obj != null)
+        {
+            m_uiManager = obj.GetComponent<MainGameUIManager>();
+            m_timerManager = obj.GetComponent<MainGameTimerManager>();
+        }
+
+        GameObject scoreObj = GameObject.Find("ScoreManager");
+
+        if (scoreObj != null)
+        {
+            m_scoreManager = scoreObj.GetComponent<ScoreManager>();
+        }
     }
 
     protected override void OnStart()
@@ -45,8 +55,12 @@ public class GameManager : BaseManager
     /// </summary>
     public void AddScore()
     {
-        //b’è‰ÁZ
-        m_uiManager.m_nTestCnt += 10;
+        if (m_scoreManager != null)
+        {
+            //b’è‰ÁZ
+            m_uiManager.m_nTestCnt += 10;
+
+        }
     }
 
     /// <summary>
@@ -54,7 +68,10 @@ public class GameManager : BaseManager
     /// </summary>
     public void SubtractScore()
     {
-        m_uiManager.m_nTestCnt -= 10;
+        if (m_scoreManager != null)
+        {
+            m_uiManager.m_nTestCnt -= 10;
+        }
     }
 
     /// <summary>
@@ -63,8 +80,8 @@ public class GameManager : BaseManager
     public void FinishMainGame()
     {
         if (m_scoreManager != null)
-        { 
-            m_scoreManager.SetScore( m_uiManager.m_nTestCnt );
+        {
+            m_scoreManager.SetScore(m_uiManager.m_nTestCnt);
         }
         AddWaitTime(m_startGameWaitTime, OnEndFinishGameWait);
     }
@@ -74,14 +91,17 @@ public class GameManager : BaseManager
     /// </summary>
     private void OnEndFinishGameWait()
     {
-        m_gameSceneManager.ChangeScene(SceneType.Result);
+        if (m_scoreManager != null)
+        {
+            m_gameSceneManager.ChangeScene(SceneType.Result);
+        }
     }
 
     /// <summary>
     /// ƒQ[ƒ€ŠJn‘Ò‹@ˆ—
     /// </summary>
     private void OnEndStartGameWait()
-    { 
-    
+    {
+
     }
 }
