@@ -62,7 +62,10 @@ public class GameManager : BaseManager
     /// </summary>
     public void FinishMainGame()
     {
-        m_scoreManager.SetScore( m_uiManager.m_nTestCnt );
+        if (m_scoreManager != null)
+        { 
+            m_scoreManager.SetScore( m_uiManager.m_nTestCnt );
+        }
         AddWaitTime(m_startGameWaitTime, OnEndFinishGameWait);
     }
 
