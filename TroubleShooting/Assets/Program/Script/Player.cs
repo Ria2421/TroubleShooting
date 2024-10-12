@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField] private float moveSecond = 0f;
 
+    /// <summary>
+    /// 行動不能秒数
+    /// </summary>
+    [SerializeField] private float stunSecond = 0f;
+
     //--------------------------
     // メソッド
 
@@ -87,12 +92,15 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == this.gameObject.tag)
         {   // 成功時
+
+            //++ スコアの加算処理
+
             playerGenerate.GeneratePlayer();
             Destroy(this.gameObject);
         }
         else
         {   // 失敗時
-            Invoke("Failure", 2.0f);
+            Invoke("Failure", stunSecond);
             this.gameObject.SetActive(false);
         }
     }
