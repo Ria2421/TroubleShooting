@@ -7,7 +7,7 @@ using TMPro;
 public class MainGameUIManager : MonoBehaviour
 {
 	GameObject m_TextObj = null;	// テキストオブジェクトを格納
-	int m_nTestCnt = 0;				// テスト用のカウント
+	public int m_nTestCnt = 0;				// テスト用のカウント
 	int m_nMaxScore = 99999;		// 最大スコア
 
 	// Start is called before the first frame update

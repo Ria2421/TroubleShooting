@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening.Core.Easing;
 
 public class MainGameTimerManager : MonoBehaviour
 {
+	private GameManager m_GameManager = null;
 	private GameObject m_TextObj = null;	// テキストオブジェクトを格納
 
 	[SerializeField]
@@ -16,10 +18,11 @@ public class MainGameTimerManager : MonoBehaviour
 	{
 		// テキストオブジェクトを取得
 		m_TextObj = GameObject.Find("TimerText");
-	}
+        m_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    void Update()
 	{
 		if (m_fLimit > 0.0f)
 		{
@@ -38,7 +41,9 @@ public class MainGameTimerManager : MonoBehaviour
 			// 仮として終了状態を表示
 			Debug.Log("終了しました！");
 
-			/* 終了処理 */
-		}
+			m_GameManager.FinishMainGame();
+
+            /* 終了処理 */
+        }
 	}
 }
