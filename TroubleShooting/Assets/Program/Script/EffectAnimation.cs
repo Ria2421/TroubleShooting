@@ -10,7 +10,7 @@ public class EffectAnimation : MonoBehaviour
     private SpriteRenderer sprite;
     private int index;
     private int count; 
-    public int frame = 600;
+    public int frame = 60;
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class EffectAnimation : MonoBehaviour
             index++;
             count=0;
         }
-        count+=10;
+        count+=1;
         //Debug.Log(count);
     }
 
