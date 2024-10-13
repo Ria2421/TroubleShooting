@@ -74,7 +74,7 @@ public class PlayerGenerate : MonoBehaviour
     public void FailureConnect()
     {
         // ˆê‰ƒXƒRƒAŒ¸Zˆ—
-        // gameManager.SubtractScore();
+        gameManager.SubtractScore();
     }
 
 }

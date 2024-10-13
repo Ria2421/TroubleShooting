@@ -28,6 +28,7 @@ public static class SEPath{
 	public const string START_00     = "SE/Start_00";
 	public const string START_01     = "SE/Start_01";
 	public const string START_02     = "SE/Start_02";
+	public const string STUN         = "SE/Stun";
 	public const string WARNING      = "SE/warning";
 
 }

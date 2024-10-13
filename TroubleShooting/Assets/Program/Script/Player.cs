@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core.Easing;
+using KanKikuchi.AudioManager;
 
 public class Player : BaseManager
 {
@@ -62,6 +63,7 @@ public class Player : BaseManager
     private void Start()
     {
         playerGenerate = GetComponentInParent<PlayerGenerate>();
+        SEManager.Instance.Play(SEPath.APPEAR_01);
         Instantiate(effects[2]);
     }
 
@@ -143,6 +145,8 @@ public class Player : BaseManager
             GameObject effect = Instantiate(effects[0],this.transform.position + revisionPos,Quaternion.identity);
             Instantiate(effects[1], this.transform.position + new Vector3(0,0,-1), Quaternion.identity);
             effect.transform.eulerAngles = effectQuaternion;
+
+            SEManager.Instance.Play(SEPath.DECIDE);
             playerGenerate.GeneratePlayer();    // ì ê∂ê¨
 
             playerGenerate.SuccessConnect();
@@ -150,6 +154,7 @@ public class Player : BaseManager
         }
         else
         {   // é∏îséû
+            SEManager.Instance.Play(SEPath.STUN);
             Instantiate(effects[3]);    // Ç≈Ç©Ç¢ÇÃÉoÅ[ÉìÇ∆
             //Instantiate(effects[3], this.transform.position, Quaternion.identity);  // ì ÇÃà íuÇ≈î≠ê∂
 
