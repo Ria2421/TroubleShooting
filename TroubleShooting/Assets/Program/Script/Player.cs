@@ -18,7 +18,7 @@ public class Player : BaseManager
     //--------------------------
     // フィールド
 
-    private float DEC_SECOND = -0.5f;
+    private float DEC_SECOND = -2.0f;
 
     /// <summary>
     /// 操作不能フラグ
