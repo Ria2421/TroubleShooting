@@ -6,23 +6,25 @@ using TMPro;
 
 public class MainGameUIManager : MonoBehaviour
 {
-	GameObject m_TextObj = null;	// テキストオブジェクトを格納
-	public int m_nTestCnt = 0;				// テスト用のカウント
-	int m_nMaxScore = 99999;		// 最大スコア
+	GameObject m_ScoreTextObj = null;	// スコア用テキストオブジェクトを格納
+	GameObject m_ComboTextObj = null;	// コンボ用テキストオブジェクトを格納
+	public int m_nTestCnt = 0;			// テスト用のカウント
+	int m_nMaxScore = 99999;			// 最大スコア
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		// テキストオブジェクトを取得
-		m_TextObj = GameObject.Find("ScoreText");
+		// スコア用テキストオブジェクトを取得
+		m_ScoreTextObj = GameObject.Find("ScoreText");
 
-		// テキスト用オブジェクトが取得出来ているか確認
+		// スコア用テキストオブジェクトが取得出来ているか確認
 		//Debug.Log(GameObject.Find("Text").GetComponent<TextMeshProUGUI>());
 
-		// 初期テキストの内容を表示
-		//Debug.Log(m_Str);
+		// コンボ用テキストオブジェクトを取得
+		m_ScoreTextObj = GameObject.Find("Text");
 
-		Debug.Log(m_nMaxScore);
+		// スコアテキストの内初期容を表示
+		//Debug.Log(m_Str);
 	}
 
 	// Update is called once per frame
@@ -40,7 +42,7 @@ public class MainGameUIManager : MonoBehaviour
 			m_nTestCnt = m_nMaxScore;
 		}
 
-		// テキスト反映
-		m_TextObj.GetComponent<TextMeshProUGUI>().text = "Score : " + m_nTestCnt;
+		// スコアテキスト反映
+		m_ScoreTextObj.GetComponent<TextMeshProUGUI>().text = "Score : " + m_nTestCnt;
 	}
 }
