@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using KanKikuchi.AudioManager;
 using static GameSceneManager;
 
 public class GameManager : BaseManager
@@ -64,6 +65,8 @@ public class GameManager : BaseManager
 
     protected override void OnStart()
     {
+        BGMManager.Instance.Play(BGMPath.MUS_MUS_BGM171,0.25f);
+
         m_player = GameObject.Find("Player").GetComponent<Player>();
 
         // TODO:競合対策　後で消す
@@ -72,6 +75,7 @@ public class GameManager : BaseManager
         m_meshProUGUI.text = (3).ToString();
         AddWaitTime(1.0f, OnEndTelopCount);
         m_player.cantMoveFlag = true;
+        m_timerManager.cantCountFlag = true;
 
         //AddWaitTime(m_startGameWaitTime, OnEndStartGameWait);
     }
@@ -157,6 +161,7 @@ public class GameManager : BaseManager
         {
             m_meshProUGUI.gameObject.SetActive( false );
             m_player.cantMoveFlag = false;
+            m_timerManager.cantCountFlag = false;
         }
     }
 }

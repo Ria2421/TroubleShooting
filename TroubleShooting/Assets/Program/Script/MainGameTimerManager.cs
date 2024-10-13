@@ -8,7 +8,8 @@ using DG.Tweening.Core.Easing;
 public class MainGameTimerManager : MonoBehaviour
 {
 	private GameManager m_GameManager = null;
-	private GameObject m_TextObj = null;	// テキストオブジェクトを格納
+	private GameObject m_TextObj = null;    // テキストオブジェクトを格納
+	public bool cantCountFlag = true;
 
 	[SerializeField]
 	private float m_fLimit = 0.0f;		// 制限時間を格納
@@ -24,6 +25,8 @@ public class MainGameTimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
+		if (cantCountFlag) return;
+
 		if (m_fLimit > 0.0f)
 		{
 			// 時間経過により減少

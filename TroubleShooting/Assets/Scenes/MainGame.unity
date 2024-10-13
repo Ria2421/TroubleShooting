@@ -580,6 +580,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1027564911173046612, guid: 015b80bbc769a484caed35fb9c2cda91, type: 3}
+      propertyPath: m_text
+      value: 'Limit : '
+      objectReference: {fileID: 0}
     - target: {fileID: 6415301245160730926, guid: 015b80bbc769a484caed35fb9c2cda91, type: 3}
       propertyPath: m_Name
       value: Canvas

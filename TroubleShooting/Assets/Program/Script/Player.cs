@@ -112,8 +112,6 @@ public class Player : BaseManager
     {
         if(collision.gameObject.tag == this.gameObject.tag)
         {   // 成功時
-            
-            //++ スコアの加算処理
 
             switch (collision.gameObject.tag)
             {
@@ -143,7 +141,7 @@ public class Player : BaseManager
 
             // hitエフェクト生成
             GameObject effect = Instantiate(effects[0],this.transform.position + revisionPos,Quaternion.identity);
-            Instantiate(effects[1], this.transform.position + new Vector3(0,0,-1), Quaternion.identity);
+            Instantiate(effects[1], this.transform.position + revisionPos, Quaternion.identity);
             effect.transform.eulerAngles = effectQuaternion;
 
             SEManager.Instance.Play(SEPath.DECIDE);
