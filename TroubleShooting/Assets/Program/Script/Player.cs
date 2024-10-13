@@ -18,6 +18,8 @@ public class Player : BaseManager
     //--------------------------
     // フィールド
 
+    private float DEC_SECOND = -0.5f;
+
     /// <summary>
     /// 操作不能フラグ
     /// </summary>
@@ -53,6 +55,9 @@ public class Player : BaseManager
     /// </summary>
     [SerializeField] private float stunSecond = 0f;
 
+    /// <summary> タイマーマネージャ</summary>
+    private MainGameTimerManager m_timerManager;
+
 
     //--------------------------
     // メソッド
@@ -63,6 +68,13 @@ public class Player : BaseManager
     private void Start()
     {
         playerGenerate = GetComponentInParent<PlayerGenerate>();
+        GameObject obj = GameObject.Find("UIManager");
+
+        if (obj != null)
+        {
+            m_timerManager = obj.GetComponent<MainGameTimerManager>();
+        }
+
         SEManager.Instance.Play(SEPath.APPEAR_01);
         Instantiate(effects[2]);
     }
@@ -154,10 +166,10 @@ public class Player : BaseManager
         {   // 失敗時
             SEManager.Instance.Play(SEPath.STUN);
             Instantiate(effects[3]);    // でかいのバーンと
-            //Instantiate(effects[3], this.transform.position, Quaternion.identity);  // 凸の位置で発生
+
+            m_timerManager.addPlayTime(DEC_SECOND);
 
             Invoke("Failure", stunSecond);
-
             playerGenerate.FailureConnect();
         }
     }

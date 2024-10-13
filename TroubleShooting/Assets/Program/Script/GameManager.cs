@@ -24,6 +24,8 @@ public class GameManager : BaseManager
     [SerializeField]
     private GameObject m_startCountText;
 
+    [SerializeField]
+    private float addSecond = 0;
 
     /// <summary>コンボ数カウント</summary>
     private int m_comboCount;
@@ -67,7 +69,7 @@ public class GameManager : BaseManager
 
     protected override void OnStart()
     {
-        BGMManager.Instance.Play(BGMPath.MUS_MUS_BGM171,0.2f);
+        BGMManager.Instance.Play(BGMPath.MUS_MUS_BGM171,0.35f);
 
         m_player = GameObject.Find("Player").GetComponent<Player>();
 
@@ -92,11 +94,17 @@ public class GameManager : BaseManager
     public void AddScore()
     {
         m_comboCount++;
+
         if ( m_scoreManager != null )
         {
             //暫定加算
             m_uiManager.SetScoreText(m_defaultAddScore * m_comboCount) ;
             m_uiManager.ChangeComboText(m_comboCount);
+
+            if (m_comboCount % 10 == 0)
+            {
+                m_timerManager.addPlayTime(addSecond);
+            }
         }
     }
 

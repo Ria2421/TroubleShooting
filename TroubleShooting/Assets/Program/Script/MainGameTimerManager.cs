@@ -49,4 +49,12 @@ public class MainGameTimerManager : MonoBehaviour
             /* I—¹ˆ— */
         }
 	}
+
+	/// <summary>
+	/// ƒvƒŒƒC•b”‰ÁZˆ—
+	/// </summary>
+	public void  addPlayTime(float addSecond)
+	{
+		m_fLimit += addSecond;
+	}
 }
