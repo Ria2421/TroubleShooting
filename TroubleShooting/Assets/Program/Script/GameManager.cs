@@ -65,7 +65,7 @@ public class GameManager : BaseManager
 
     protected override void OnStart()
     {
-        BGMManager.Instance.Play(BGMPath.MUS_MUS_BGM171,0.25f);
+        BGMManager.Instance.Play(BGMPath.MUS_MUS_BGM171,0.2f);
 
         m_player = GameObject.Find("Player").GetComponent<Player>();
 
