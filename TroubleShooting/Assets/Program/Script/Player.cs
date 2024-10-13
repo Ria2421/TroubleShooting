@@ -12,15 +12,15 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core.Easing;
 
-public class Player : MonoBehaviour
+public class Player : BaseManager
 {
     //--------------------------
     // フィールド
 
     /// <summary>
-    /// 操作フラグ
+    /// 操作不能フラグ
     /// </summary>
-    private bool moveFlag = false;
+    private bool cantMoveFlag = false;
 
     /// <summary>
     /// プレイヤー生成スクリプト
@@ -70,32 +70,32 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (moveFlag) return;
+        if (cantMoveFlag) return;
 
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {   // W・↑キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(0f, 4f, 0f), moveSecond);
         }
         else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {   // S・↓キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(0f, -4f, 0f), moveSecond);
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {   // A・←キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(-4f, 0f, 0f), moveSecond);
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {   // D・→キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(4f, 0f, 0f), moveSecond);
@@ -150,9 +150,11 @@ public class Player : MonoBehaviour
         }
         else
         {   // 失敗時
+            Instantiate(effects[3]);    // でかいのバーンと
+            //Instantiate(effects[3], this.transform.position, Quaternion.identity);  // 凸の位置で発生
+
             Invoke("Failure", stunSecond);
 
-            this.gameObject.SetActive(false);
             playerGenerate.FailureConnect();
         }
     }
@@ -172,5 +174,14 @@ public class Player : MonoBehaviour
     {
         playerGenerate.GeneratePlayer();
         Destroy(this.gameObject);
+    }
+
+    /// <summary>
+    /// 入力有効設定
+    /// </summary>
+    /// <param name="_enable"></param>
+    public void SetEnableInput(bool _enable)
+    {
+        cantMoveFlag = _enable;
     }
 }

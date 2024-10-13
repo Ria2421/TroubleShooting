@@ -40,7 +40,6 @@ public class PlayerGenerate : MonoBehaviour
         childObj.transform.parent = this.transform;
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
     }
 
     /// <summary>

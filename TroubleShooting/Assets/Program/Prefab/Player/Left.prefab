@@ -123,6 +123,7 @@ MonoBehaviour:
   - {fileID: 3814630119094798492, guid: 34d93f8ec47b97a4ead7df289e5ff2a2, type: 3}
   - {fileID: 6814354538584836490, guid: c95e1127874579340bcd8f8021b76f2e, type: 3}
   - {fileID: 4578637038116620178, guid: fb56a3a4e4f0b2e4bbca6ca460f747cc, type: 3}
+  - {fileID: 8169725473309233486, guid: a460ab6fd14ca034bbbc3945a3a96a74, type: 3}
   moveSecond: 0.35
   stunSecond: 0.7
 --- !u!54 &3287325304150743685
