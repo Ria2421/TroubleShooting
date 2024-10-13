@@ -60,7 +60,7 @@ public class Player : BaseManager
     /// <summary>
     /// ‰Šúˆ—
     /// </summary>
-    private void StartS()
+    private void Start()
     {
         playerGenerate = GetComponentInParent<PlayerGenerate>();
         SEManager.Instance.Play(SEPath.APPEAR_01);
