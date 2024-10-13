@@ -33,11 +33,12 @@ public class PlayerGenerate : MonoBehaviour
     /// <summary>
     /// ‰Šúˆ—
     /// </summary>
-    void Start()
+    void Awake()
     {
         // ƒvƒŒƒCƒ„[‚Ì¶¬
         GameObject childObj =  Instantiate(playerObjs[Random.Range(0, playerObjs.Count)]);
         childObj.transform.parent = this.transform;
+        childObj.name = "Player";
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }

@@ -21,7 +21,7 @@ public class Player : BaseManager
     /// <summary>
     /// 操作不能フラグ
     /// </summary>
-    private bool cantMoveFlag = false;
+    public bool cantMoveFlag = false;
 
     /// <summary>
     /// プレイヤー生成スクリプト
@@ -60,7 +60,7 @@ public class Player : BaseManager
     /// <summary>
     /// 初期処理
     /// </summary>
-    private void Start()
+    private void StartS()
     {
         playerGenerate = GetComponentInParent<PlayerGenerate>();
         SEManager.Instance.Play(SEPath.APPEAR_01);

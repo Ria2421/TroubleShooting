@@ -18,7 +18,7 @@ public class GameSceneManager : BaseManager
 
     protected override void OnAwake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad( this );
     }
 
     protected override void OnUpdate()
