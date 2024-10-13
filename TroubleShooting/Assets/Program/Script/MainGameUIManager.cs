@@ -6,7 +6,7 @@ using TMPro;
 
 public class MainGameUIManager : MonoBehaviour
 {
-	GameObject m_ScoreTextObj = null;	// スコア用テキストオブジェクトを格納
+    TextMeshProUGUI m_ScoreTextObj = null;	// スコア用テキストオブジェクトを格納
 	GameObject m_ComboTextObj = null;	// コンボ用テキストオブジェクトを格納
 	public int m_nTestCnt = 0;			// スコアの値
 	int m_nMaxScore = 99999;			// 最大スコア
@@ -15,7 +15,7 @@ public class MainGameUIManager : MonoBehaviour
 	void Start()
 	{
 		// スコア用テキストオブジェクトを取得
-		m_ScoreTextObj = GameObject.Find("ScoreText");
+		m_ScoreTextObj = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
 
 		// スコア用テキストオブジェクトが取得出来ているか確認
 		//Debug.Log(GameObject.Find("Text").GetComponent<TextMeshProUGUI>());
@@ -48,8 +48,7 @@ public class MainGameUIManager : MonoBehaviour
 		}
 
 		// スコア値をテキストに反映
-        Debug.Log(m_ScoreTextObj.GetComponent<TextMeshProUGUI>() != null);
-		m_ScoreTextObj.GetComponent<TextMeshProUGUI>().text = m_nTestCnt.ToString();
+		m_ScoreTextObj.text = m_nTestCnt.ToString();
 
     }
 
