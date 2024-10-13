@@ -74,28 +74,28 @@ public class Player : BaseManager
     {
         if (cantMoveFlag) return;
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {   // W・↑キー操作
             cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(0f, 4f, 0f), moveSecond);
         }
-        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {   // S・↓キー操作
             cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(0f, -4f, 0f), moveSecond);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {   // A・←キー操作
             cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(-4f, 0f, 0f), moveSecond);
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {   // D・→キー操作
             cantMoveFlag = true;
 
