@@ -823,7 +823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1477234032012181717, guid: 8a051c3da90dccf468a91f45bf4a7843, type: 3}
       propertyPath: m_finishGameWaitTime
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6488923242616904337, guid: 8a051c3da90dccf468a91f45bf4a7843, type: 3}
       propertyPath: m_Name

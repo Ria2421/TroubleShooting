@@ -43,6 +43,8 @@ public class GameManager : BaseManager
 
     private Player m_player;
 
+    private bool m_isFinish = false;
+
     protected override void OnAwake()
     {
         GameObject obj = GameObject.Find("UIManager");
@@ -90,7 +92,6 @@ public class GameManager : BaseManager
     public void AddScore()
     {
         m_comboCount++;
-
         if ( m_scoreManager != null )
         {
             //暫定加算
@@ -118,11 +119,16 @@ public class GameManager : BaseManager
     /// </summary>
     public void FinishMainGame()
     {
-        if (m_scoreManager != null)
+        if (!m_isFinish)
         {
-            m_scoreManager.SetScore(m_uiManager.m_nTestCnt);
+            if (m_scoreManager != null)
+            {
+                m_scoreManager.SetScore(m_uiManager.m_nTestCnt);
+            }
+
+            m_isFinish = true;
+            AddWaitTime(m_finishGameWaitTime, OnEndFinishGameWait, true);
         }
-        AddWaitTime(m_startGameWaitTime, OnEndFinishGameWait);
     }
 
     /// <summary>
@@ -130,6 +136,7 @@ public class GameManager : BaseManager
     /// </summary>
     private void OnEndFinishGameWait()
     {
+            Debug.Log("おわり");
         if (m_scoreManager != null)
         {
             m_gameSceneManager.ChangeScene(SceneType.Result);

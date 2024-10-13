@@ -49,10 +49,12 @@ public class MainGameUIManager : MonoBehaviour
 
 		// スコア値をテキストに反映
 		m_ScoreTextObj.GetComponent<TextMeshProUGUI>().text = "Score : " + m_nTestCnt;
-	}
+        Debug.Log(m_ScoreTextObj.GetComponent<TextMeshProUGUI>() != null);
 
-	// コンボ数の変化をテキストに反映
-	public void ChangeComboText (int nComboNum)
+    }
+
+    // コンボ数の変化をテキストに反映
+    public void ChangeComboText (int nComboNum)
 	{
 		m_ComboTextObj.GetComponent<TextMeshProUGUI>().text = "Combo : " + nComboNum;
 	}
