@@ -36,7 +36,7 @@ public class MainGameTimerManager : MonoBehaviour
 			string Str = m_fLimit.ToString("F2");
 
 			// テキスト反映
-			m_TextObj.GetComponent<TextMeshProUGUI>().text = "Limit : " + Str;
+			m_TextObj.GetComponent<TextMeshProUGUI>().text =  Str.ToString();
 		}
 		else
 		{ // 時間が無くなったら
