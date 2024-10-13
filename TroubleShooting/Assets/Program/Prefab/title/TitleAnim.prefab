@@ -98,6 +98,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
+  - {fileID: 21300000, guid: 7ec7cd57a48070b43ae0e3ecaaaf7b9f, type: 3}
+  - {fileID: 21300000, guid: 5dca5da8a7cddf143893994fe2c1a440, type: 3}
+  - {fileID: 21300000, guid: 1f2dbed45111e8847a7ae31b6024be73, type: 3}
+  - {fileID: 21300000, guid: ecfede13f8321d54e8b46a640cc41a67, type: 3}
+  - {fileID: 21300000, guid: 64403131e82c27c408a8d8df5ce95cbe, type: 3}
+  - {fileID: 21300000, guid: 55388f3ca664aae42a062fa15baa9c1f, type: 3}
   - {fileID: 21300000, guid: 80536d2bb8cfa5d4c91a045bfb1614c3, type: 3}
   - {fileID: 21300000, guid: 3ec4205a5af2a584ea502b74a2c14b4c, type: 3}
   - {fileID: 21300000, guid: ce1d253941616a24abab38ed76db20eb, type: 3}
@@ -187,6 +193,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 645e4ca71810a214db1a34ef7bb41815, type: 3}
   - {fileID: 21300000, guid: 796f6b86c32d2dd48af5935f2b368159, type: 3}
   - {fileID: 21300000, guid: 1bae046c49c691d47a51ef227e2b713c, type: 3}
+  - {fileID: 21300000, guid: 3843d20522239ca4ebfd456e40a8dfc8, type: 3}
+  - {fileID: 21300000, guid: d0b702bf3bb5084499caaf7a912b0471, type: 3}
+  - {fileID: 21300000, guid: 147cddfed4ceee14691f94d313a1c50e, type: 3}
+  - {fileID: 21300000, guid: 5534c02714ab9b04c87d7d722b6abd73, type: 3}
+  - {fileID: 21300000, guid: 92a9688784e64844f9ef2b72dc872488, type: 3}
+  - {fileID: 21300000, guid: 4d379e579aa0140438c10f5e8c771e74, type: 3}
+  - {fileID: 21300000, guid: 2d7e7006f772c7740b678e339e26f824, type: 3}
+  - {fileID: 21300000, guid: 3622bea2078c98748b9ce020d1425ce2, type: 3}
+  - {fileID: 21300000, guid: c767f3ebe92904c40a2eb57dd2ae1377, type: 3}
+  - {fileID: 21300000, guid: 037e97a2056d16541b937e136dacc7db, type: 3}
   - {fileID: 21300000, guid: 94e3e08c21a183c4ea9f65e0aa6bb917, type: 3}
   - {fileID: 21300000, guid: 5ef50b499be7d94419f60d8ce7fb5b64, type: 3}
   - {fileID: 21300000, guid: 5f6555b1da64f9c41850d5939a714ff8, type: 3}
@@ -201,4 +217,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1f3e9d91a66dd814193b2f22cb4c7666, type: 3}
   - {fileID: 21300000, guid: 2fa5d7c6a4984e6419a04b702014f652, type: 3}
   - {fileID: 21300000, guid: a0e311d5dbe13654ca3a2246efabcfb8, type: 3}
+  - {fileID: 21300000, guid: a8374b7406e892646b2a4cc5500f8b3b, type: 3}
   frame: 5

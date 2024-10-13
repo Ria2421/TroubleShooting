@@ -11,16 +11,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core.Easing;
+using KanKikuchi.AudioManager;
 
-public class Player : MonoBehaviour
+public class Player : BaseManager
 {
     //--------------------------
     // フィールド
 
+    private float DEC_SECOND = -2.0f;
+
     /// <summary>
-    /// 操作フラグ
+    /// 操作不能フラグ
     /// </summary>
-    private bool moveFlag = false;
+    public bool cantMoveFlag = false;
 
     /// <summary>
     /// プレイヤー生成スクリプト
@@ -52,6 +55,9 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField] private float stunSecond = 0f;
 
+    /// <summary> タイマーマネージャ</summary>
+    private MainGameTimerManager m_timerManager;
+
 
     //--------------------------
     // メソッド
@@ -62,6 +68,14 @@ public class Player : MonoBehaviour
     private void Start()
     {
         playerGenerate = GetComponentInParent<PlayerGenerate>();
+        GameObject obj = GameObject.Find("UIManager");
+
+        if (obj != null)
+        {
+            m_timerManager = obj.GetComponent<MainGameTimerManager>();
+        }
+
+        SEManager.Instance.Play(SEPath.APPEAR_01);
         Instantiate(effects[2]);
     }
 
@@ -70,32 +84,32 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (moveFlag) return;
+        if (cantMoveFlag) return;
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {   // W・↑キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(0f, 4f, 0f), moveSecond);
         }
-        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {   // S・↓キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(0f, -4f, 0f), moveSecond);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {   // A・←キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(-4f, 0f, 0f), moveSecond);
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {   // D・→キー操作
-            moveFlag = true;
+            cantMoveFlag = true;
 
             // 移動処理
             this.transform.DOMove(new Vector3(4f, 0f, 0f), moveSecond);
@@ -110,8 +124,6 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == this.gameObject.tag)
         {   // 成功時
-            
-            //++ スコアの加算処理
 
             switch (collision.gameObject.tag)
             {
@@ -141,8 +153,10 @@ public class Player : MonoBehaviour
 
             // hitエフェクト生成
             GameObject effect = Instantiate(effects[0],this.transform.position + revisionPos,Quaternion.identity);
-            Instantiate(effects[1], this.transform.position + new Vector3(0,0,-1), Quaternion.identity);
+            Instantiate(effects[1], this.transform.position + revisionPos, Quaternion.identity);
             effect.transform.eulerAngles = effectQuaternion;
+
+            SEManager.Instance.Play(SEPath.DECIDE);
             playerGenerate.GeneratePlayer();    // 凸生成
 
             playerGenerate.SuccessConnect();
@@ -150,9 +164,12 @@ public class Player : MonoBehaviour
         }
         else
         {   // 失敗時
-            Invoke("Failure", stunSecond);
+            SEManager.Instance.Play(SEPath.STUN);
+            Instantiate(effects[3]);    // でかいのバーンと
 
-            this.gameObject.SetActive(false);
+            m_timerManager.addPlayTime(DEC_SECOND);
+
+            Invoke("Failure", stunSecond);
             playerGenerate.FailureConnect();
         }
     }
@@ -172,5 +189,14 @@ public class Player : MonoBehaviour
     {
         playerGenerate.GeneratePlayer();
         Destroy(this.gameObject);
+    }
+
+    /// <summary>
+    /// 入力有効設定
+    /// </summary>
+    /// <param name="_enable"></param>
+    public void SetEnableInput(bool _enable)
+    {
+        cantMoveFlag = _enable;
     }
 }

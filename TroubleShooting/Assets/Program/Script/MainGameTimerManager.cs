@@ -8,7 +8,8 @@ using DG.Tweening.Core.Easing;
 public class MainGameTimerManager : MonoBehaviour
 {
 	private GameManager m_GameManager = null;
-	private GameObject m_TextObj = null;	// テキストオブジェクトを格納
+	private GameObject m_TextObj = null;    // テキストオブジェクトを格納
+	public bool cantCountFlag = true;
 
 	[SerializeField]
 	private float m_fLimit = 0.0f;		// 制限時間を格納
@@ -24,6 +25,8 @@ public class MainGameTimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
+		if (cantCountFlag) return;
+
 		if (m_fLimit > 0.0f)
 		{
 			// 時間経過により減少
@@ -33,7 +36,7 @@ public class MainGameTimerManager : MonoBehaviour
 			string Str = m_fLimit.ToString("F2");
 
 			// テキスト反映
-			m_TextObj.GetComponent<TextMeshProUGUI>().text = "Limit : " + Str;
+			m_TextObj.GetComponent<TextMeshProUGUI>().text =  Str.ToString();
 		}
 		else
 		{ // 時間が無くなったら
@@ -45,5 +48,13 @@ public class MainGameTimerManager : MonoBehaviour
 
             /* 終了処理 */
         }
+	}
+
+	/// <summary>
+	/// プレイ秒数加算処理
+	/// </summary>
+	public void  addPlayTime(float addSecond)
+	{
+		m_fLimit += addSecond;
 	}
 }

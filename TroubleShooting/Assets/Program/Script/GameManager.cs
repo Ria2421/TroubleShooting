@@ -1,34 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using KanKikuchi.AudioManager;
 using static GameSceneManager;
 
 public class GameManager : BaseManager
 {
-    /// <summary>@ŠJ¦‘Ò‹@ŠÔ </summary>
-    // [SerializeField]
+    /// <summary>ã€€é–‹ç¤ºå¾…æ©Ÿæ™‚é–“ </summary>
+    [SerializeField]
     private float m_startGameWaitTime;
 
-    /// <summary>I—¹Œã‘Ò‹@ŠÔ</summary>
+    /// <summary>çµ‚äº†å¾Œå¾…æ©Ÿæ™‚é–“</summary>
     [SerializeField]
     private float m_finishGameWaitTime;
 
-    /// <summary> Šî–{‚Ì‰ÁZƒXƒRƒA</summary>
+    /// <summary> åŸºæœ¬ã®åŠ ç®—ã‚¹ã‚³ã‚¢</summary>
     [SerializeField]
     private int m_defaultAddScore;
 
-    /// <summary>ƒRƒ“ƒ{”ƒJƒEƒ“ƒg</summary>
+    /// <summary> ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆãƒ†ã‚­ã‚¹ãƒˆ</summary>
+    [SerializeField]
+    private GameObject m_startCountText;
+
+    [SerializeField]
+    private float addSecond = 0;
+
+    /// <summary>ã‚³ãƒ³ãƒœæ•°ã‚«ã‚¦ãƒ³ãƒˆ</summary>
     private int m_comboCount;
 
-    /// <summary> UIƒ}ƒl[ƒWƒƒ </summary>
+    private int m_waitCount;
+
+    /// <summary> UIãƒãƒãƒ¼ã‚¸ãƒ£ </summary>
     private MainGameUIManager m_uiManager;
 
-    /// <summary> ƒ^ƒCƒ}[ƒ}ƒl[ƒWƒƒ</summary>
+    /// <summary> ã‚¿ã‚¤ãƒãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£</summary>
     private MainGameTimerManager m_timerManager;
 
-    /// <summary> ƒXƒRƒAƒ}ƒl[ƒWƒƒ</summary>
+    /// <summary> ã‚¹ã‚³ã‚¢ãƒãƒãƒ¼ã‚¸ãƒ£</summary>
     private ScoreManager m_scoreManager;
+
+    private TextMeshProUGUI m_meshProUGUI;
+
+    private Player m_player;
+
+    private bool m_isFinish = false;
 
     protected override void OnAwake()
     {
@@ -46,14 +63,25 @@ public class GameManager : BaseManager
         {
             m_scoreManager = scoreObj.GetComponent<ScoreManager>();
         }
+
+        m_meshProUGUI = GameObject.Find("CountText").GetComponent<TextMeshProUGUI>();
     }
 
     protected override void OnStart()
     {
-        // TODO:‹£‡‘Îô@Œã‚ÅÁ‚·
+        BGMManager.Instance.Play(BGMPath.MUS_MUS_BGM171,0.35f);
+
+        m_player = GameObject.Find("Player").GetComponent<Player>();
+
+        // TODO:ç«¶åˆå¯¾ç­–ã€€å¾Œã§æ¶ˆã™
         m_defaultAddScore = m_defaultAddScore == 0 ? 10 : m_defaultAddScore;
 
-        AddWaitTime(m_startGameWaitTime, OnEndStartGameWait);
+        m_meshProUGUI.text = (3).ToString();
+        AddWaitTime(1.0f, OnEndTelopCount);
+        m_player.cantMoveFlag = true;
+        m_timerManager.cantCountFlag = true;
+
+        //AddWaitTime(m_startGameWaitTime, OnEndStartGameWait);
     }
 
     protected override void OnUpdate()
@@ -61,21 +89,27 @@ public class GameManager : BaseManager
     }
 
     /// <summary>
-    /// ƒXƒRƒA‰ÁZ
+    /// ã‚¹ã‚³ã‚¢åŠ ç®—
     /// </summary>
     public void AddScore()
     {
         m_comboCount++;
 
-        if (m_scoreManager != null)
+        if ( m_scoreManager != null )
         {
-            //b’è‰ÁZ
-            m_uiManager.m_nTestCnt += m_defaultAddScore * m_comboCount;
+            //æš«å®šåŠ ç®—
+            m_uiManager.SetScoreText(m_defaultAddScore * m_comboCount) ;
+            m_uiManager.ChangeComboText(m_comboCount);
+
+            if (m_comboCount % 10 == 0)
+            {
+                m_timerManager.addPlayTime(addSecond);
+            }
         }
     }
 
     /// <summary>
-    /// ƒXƒRƒAŒ¸Z
+    /// ã‚¹ã‚³ã‚¢æ¸›ç®—
     /// </summary>
     public void SubtractScore()
     {
@@ -84,26 +118,33 @@ public class GameManager : BaseManager
         if (m_scoreManager != null)
         {
             //m_uiManager.m_nTestCnt -= 10;
+            m_uiManager.ChangeComboText(m_comboCount);
         }
     }
 
     /// <summary>
-    /// ƒƒCƒ“ƒQ[ƒ€I—¹ƒR[ƒ‹ƒoƒbƒN
+    /// ãƒ¡ã‚¤ãƒ³ã‚²ãƒ¼ãƒ çµ‚äº†ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
     /// </summary>
     public void FinishMainGame()
     {
-        if (m_scoreManager != null)
+        if (!m_isFinish)
         {
-            m_scoreManager.SetScore(m_uiManager.m_nTestCnt);
+            if (m_scoreManager != null)
+            {
+                m_scoreManager.SetScore(m_uiManager.m_nTestCnt);
+            }
+
+            m_isFinish = true;
+            AddWaitTime(m_finishGameWaitTime, OnEndFinishGameWait, true);
         }
-        AddWaitTime(m_startGameWaitTime, OnEndFinishGameWait);
     }
 
     /// <summary>
-    /// ƒQ[ƒ€I—¹‘Ò‹@ˆ—
+    /// ã‚²ãƒ¼ãƒ çµ‚äº†å¾…æ©Ÿå‡¦ç†
     /// </summary>
     private void OnEndFinishGameWait()
     {
+            Debug.Log("ãŠã‚ã‚Š");
         if (m_scoreManager != null)
         {
             m_gameSceneManager.ChangeScene(SceneType.Result);
@@ -111,10 +152,31 @@ public class GameManager : BaseManager
     }
 
     /// <summary>
-    /// ƒQ[ƒ€ŠJn‘Ò‹@ˆ—
+    /// ã‚²ãƒ¼ãƒ é–‹å§‹å¾…æ©Ÿå‡¦ç†
     /// </summary>
     private void OnEndStartGameWait()
     {
 
+    }
+
+
+    /// <summary>
+    /// ã‚²ãƒ¼ãƒ é–‹å§‹å¾…æ©Ÿå‡¦ç†
+    /// </summary>
+    private void OnEndTelopCount()
+    {
+        m_waitCount++;
+        m_meshProUGUI.text = ( 3 - m_waitCount ).ToString();
+
+        if (m_waitCount < m_startGameWaitTime)
+        {
+            AddWaitTime(1.0f, OnEndTelopCount, true);
+        }
+        else
+        {
+            m_meshProUGUI.gameObject.SetActive( false );
+            m_player.cantMoveFlag = false;
+            m_timerManager.cantCountFlag = false;
+        }
     }
 }

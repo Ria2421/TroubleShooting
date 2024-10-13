@@ -1612,7 +1612,7 @@ PrefabInstance:
       objectReference: {fileID: 1387721484}
     - target: {fileID: 6458449036379269382, guid: 5c1468fa6f86a824985cae88be0ab20a, type: 3}
       propertyPath: m_waitInputTime
-      value: 60
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8081630058086255535, guid: 5c1468fa6f86a824985cae88be0ab20a, type: 3}
       propertyPath: m_Name

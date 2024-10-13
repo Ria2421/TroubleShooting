@@ -6,7 +6,7 @@ using TMPro;
 
 public class MainGameUIManager : MonoBehaviour
 {
-	GameObject m_ScoreTextObj = null;	// スコア用テキストオブジェクトを格納
+    TextMeshProUGUI m_ScoreTextObj = null;	// スコア用テキストオブジェクトを格納
 	GameObject m_ComboTextObj = null;	// コンボ用テキストオブジェクトを格納
 	public int m_nTestCnt = 0;			// スコアの値
 	int m_nMaxScore = 99999;			// 最大スコア
@@ -15,7 +15,7 @@ public class MainGameUIManager : MonoBehaviour
 	void Start()
 	{
 		// スコア用テキストオブジェクトを取得
-		m_ScoreTextObj = GameObject.Find("ScoreText");
+		m_ScoreTextObj = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
 
 		// スコア用テキストオブジェクトが取得出来ているか確認
 		//Debug.Log(GameObject.Find("Text").GetComponent<TextMeshProUGUI>());
@@ -47,13 +47,21 @@ public class MainGameUIManager : MonoBehaviour
 			m_nTestCnt = m_nMaxScore;
 		}
 
-		// スコア値をテキストに反映
-		m_ScoreTextObj.GetComponent<TextMeshProUGUI>().text = "Score : " + m_nTestCnt;
+
+    }
+
+	public void SetScoreText( int _score )
+	{
+
+		m_nTestCnt += _score;
+        // スコア値をテキストに反映
+        m_ScoreTextObj.text = m_nTestCnt.ToString();
+	
 	}
 
-	// コンボ数の変化をテキストに反映
-	public void ChangeComboText (int nComboNum)
+    // コンボ数の変化をテキストに反映
+    public void ChangeComboText (int nComboNum)
 	{
-		m_ComboTextObj.GetComponent<TextMeshProUGUI>().text = "Combo : " + nComboNum;
+		m_ComboTextObj.GetComponent<TextMeshProUGUI>().text = nComboNum.ToString();
 	}
 }

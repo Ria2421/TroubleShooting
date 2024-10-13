@@ -14,7 +14,7 @@ public class BaseManager : MonoBehaviour
     public delegate void OnFinishedWaitTime();
 
     /// <summary> 待機中のデリゲート </summary>
-    private   OnFinishedWaitTime m_waitTimeDelegate;
+    protected OnFinishedWaitTime m_waitTimeDelegate;
 
     /// <summary> 待機終了時間 </summary>
     private float m_waitEndTime = 0;
@@ -61,8 +61,8 @@ public class BaseManager : MonoBehaviour
             m_waitTime += Time.deltaTime;
             if (m_waitTime >= m_waitEndTime)
             {
+                m_waitTime = 0;
                 m_waitTimeDelegate();
-                m_waitTimeDelegate = null;
             }
         }
 
@@ -85,12 +85,13 @@ public class BaseManager : MonoBehaviour
     /// <param name="_time">時間</param>
     /// <param name="_onfinishWait">実行するメソッド</param>
     /// <returns>可否</returns>
-    public bool AddWaitTime( float _time, OnFinishedWaitTime _onfinishWait )
+    public bool AddWaitTime( float _time, OnFinishedWaitTime _onfinishWait, bool compelAdd=false)
     {
-        if ( m_waitTimeDelegate == null )
+        if ( m_waitTimeDelegate == null || compelAdd)
         {
-            m_waitTimeDelegate += _onfinishWait;
-            m_waitTime = _time;
+            m_waitTime = 0;
+            m_waitTimeDelegate = _onfinishWait;
+            m_waitEndTime = _time;
         }
         else 
         { 

@@ -9,7 +9,6 @@
 using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PlayerGenerate : MonoBehaviour
@@ -33,14 +32,14 @@ public class PlayerGenerate : MonoBehaviour
     /// <summary>
     /// 初期処理
     /// </summary>
-    void Start()
+    void Awake()
     {
         // プレイヤーの生成
         GameObject childObj =  Instantiate(playerObjs[Random.Range(0, playerObjs.Count)]);
         childObj.transform.parent = this.transform;
+        childObj.name = "Player";
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
     }
 
     /// <summary>
@@ -75,7 +74,7 @@ public class PlayerGenerate : MonoBehaviour
     public void FailureConnect()
     {
         // 一応スコア減算処理
-        // gameManager.SubtractScore();
+        gameManager.SubtractScore();
     }
 
 }

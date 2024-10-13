@@ -23,6 +23,7 @@ public class TitleManager : BaseManager
 
     protected override void OnAwake()
     {
+        Application.targetFrameRate = 60;
         if (GameObject.Find("ScoreManager") == null)
         {
             Instantiate(m_scoreManager).gameObject.name = "ScoreManager";
