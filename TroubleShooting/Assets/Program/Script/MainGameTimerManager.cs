@@ -31,12 +31,16 @@ public class MainGameTimerManager : MonoBehaviour
 		{
 			// 時間経過により減少
 			m_fLimit -= Time.deltaTime;
+			if (m_fLimit < 0.0f)
+			{
+				m_fLimit = 0.0f;
 
+			}
 			// 小数第3位以下を切り捨て
 			string Str = m_fLimit.ToString("F2");
 
 			// テキスト反映
-			m_TextObj.GetComponent<TextMeshProUGUI>().text =  Str.ToString();
+			m_TextObj.GetComponent<TextMeshProUGUI>().text = Str.ToString();
 		}
 		else
 		{ // 時間が無くなったら
@@ -46,8 +50,8 @@ public class MainGameTimerManager : MonoBehaviour
 
 			m_GameManager.FinishMainGame();
 
-            /* 終了処理 */
-        }
+			/* 終了処理 */
+		}
 	}
 
 	/// <summary>
