@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using static GameSceneManager;
+using static ScoreManager;
 
 public class ResultManager : BaseManager
 {
@@ -12,9 +15,22 @@ public class ResultManager : BaseManager
     [SerializeField]
     private float m_waitInputTime;
 
+    [SerializeField]
+    private TextMeshProUGUI m_scoreText;
+
+    /// <summary> スコアマネージャ</summary>
+    private ScoreManager m_scoreManager;
+
     protected override void OnStart()
     {
         AddWaitTime(m_waitInputTime, OnStartInput);
+        GameObject scoreObj = GameObject.Find("ScoreManager");
+
+        if (scoreObj != null)
+        {
+            m_scoreManager = scoreObj.GetComponent<ScoreManager>();
+            m_scoreText.text = m_scoreManager.GetScore().ToString();
+        }
     }
 
     protected override void OnUpdate()
@@ -22,6 +38,7 @@ public class ResultManager : BaseManager
         if (m_isInputStart && Input.anyKey)
         {
             m_gameSceneManager.ChangeScene(SceneType.Title);
+            m_scoreManager.AddScoreData( m_scoreManager.GetScore() );
         }
     }
 
