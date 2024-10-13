@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb11370978eb8fc40b17d4d9974bff89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_nTestCnt: 0
 --- !u!114 &7426436936707267436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,4 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cdc1e128113c94a816b4def851c3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fLimit: 10
+  m_fLimit: 2
