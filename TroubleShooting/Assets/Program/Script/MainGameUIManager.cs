@@ -47,10 +47,17 @@ public class MainGameUIManager : MonoBehaviour
 			m_nTestCnt = m_nMaxScore;
 		}
 
-		// スコア値をテキストに反映
-		m_ScoreTextObj.text = m_nTestCnt.ToString();
 
     }
+
+	public void SetScoreText( int _score )
+	{
+
+		m_nTestCnt += _score;
+        // スコア値をテキストに反映
+        m_ScoreTextObj.text = m_nTestCnt.ToString();
+	
+	}
 
     // コンボ数の変化をテキストに反映
     public void ChangeComboText (int nComboNum)

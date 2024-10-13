@@ -95,7 +95,7 @@ public class GameManager : BaseManager
         if ( m_scoreManager != null )
         {
             //暫定加算
-            m_uiManager.m_nTestCnt += m_defaultAddScore * m_comboCount;
+            m_uiManager.SetScoreText(m_defaultAddScore * m_comboCount) ;
             m_uiManager.ChangeComboText(m_comboCount);
         }
     }
